@@ -72,7 +72,7 @@ public class Application {
 
         return new ResponseEntity<>(data, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
     // END
