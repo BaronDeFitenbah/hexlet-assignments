@@ -24,7 +24,7 @@ public class ProductsController {
 
     // BEGIN
     @GetMapping(path = "")
-    public List<Product> show(@RequestParam Integer min, @RequestParam Integer max) {
+    public List<Product> show(@RequestParam(required = false) Integer min, @RequestParam(required = false) Integer max) {
         List<Product> products;
         if (min != null && max != null) {
             products = productRepository.findByPriceBetween(min, max);
