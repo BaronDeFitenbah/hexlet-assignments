@@ -24,8 +24,21 @@ public class ProductsController {
 
     // BEGIN
     @GetMapping(path = "")
-    public List<Product> show(@RequestParam int min, @RequestParam int max) {
-        var products = productRepository.findByPriceBetween(min, max);
+    public List<Product> show(@RequestParam Integer min, @RequestParam Integer max) {
+        List<Product> products;
+        if (min != null && max != null) {
+            products = productRepository.findByPriceBetween(min, max);
+
+        } else if (max != null) {
+            products = productRepository.findByPriceLessThan(max);
+
+        } else if (min != null) {
+            products = productRepository.findByPriceGreaterThan(min);
+
+        } else {
+            products = productRepository.findAll();
+
+        }
         products.sort(Comparator.comparing(Product::getPrice));
         return products;
     }
