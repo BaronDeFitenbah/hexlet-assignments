@@ -42,7 +42,7 @@ public class ProductsController {
     @GetMapping(path = "/{id}")
     public Product show(@PathVariable long id) {
         var product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product with" + id + "not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product with " + id + " not found"));
         return product;
     }
 
@@ -54,7 +54,7 @@ public class ProductsController {
            Product product = productOptional.get();
            return ResponseEntity.ok(product);
         } else {
-            throw new ResourceNotFoundException("Product with" + id + "not found");
+            throw new ResourceNotFoundException("Product with " + id + " not found");
         }
     }
     // END
