@@ -1,6 +1,7 @@
 package exercise.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,8 +42,9 @@ public class TasksController {
 
     // BEGIN
     @PostMapping(path = "")
-    public Task create( @RequestBody Task task) {
-        return taskRepository.save(task);
+    public ResponseEntity<Task> create( @RequestBody Task task) {
+        taskRepository.save(task);
+        return new ResponseEntity<>(task, HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{id}")
