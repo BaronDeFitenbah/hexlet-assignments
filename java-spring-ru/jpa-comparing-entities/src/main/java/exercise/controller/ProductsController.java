@@ -33,12 +33,12 @@ public class ProductsController {
     }
 
     @PostMapping(path = "")
-    public Product create(@RequestBody Product product) {
+    public ResponseEntity<Product> create(@RequestBody Product product) {
         var dopplegunger = productRepository.findAll().stream()
                 .filter(p -> p.equals(product))
                 .toList();
         if (dopplegunger.isEmpty()) {
-            return productRepository.save(product);
+            return new ResponseEntity<>(product, HttpStatus.CREATED);
         } else {
             throw new ResourceAlreadyExistsException("");
         }
