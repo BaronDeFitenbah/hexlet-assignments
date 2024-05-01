@@ -47,12 +47,16 @@ public class ProductsController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<Product> update(@PathVariable long id) {
+    public ResponseEntity<Product> update(@PathVariable long id, @RequestBody Product product) {
         Optional<Product> productOptional = productRepository.findById(id);
 
         if (productOptional.isPresent()) {
-           Product product = productOptional.get();
-           return ResponseEntity.ok(product);
+           Product productData = productOptional.get();
+            productData.setPrice(product.getPrice());
+            productData.setTitle(product.getTitle());
+            productRepository.save(productData);
+
+            return ResponseEntity.ok(product);
         } else {
             throw new ResourceNotFoundException("Product with id " + id + " not found");
         }
