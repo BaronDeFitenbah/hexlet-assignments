@@ -54,7 +54,7 @@ public class ProductsController {
            Product product = productOptional.get();
            return ResponseEntity.ok(product);
         } else {
-            throw new ResourceNotFoundException("Product with  id " + id + " not found");
+            throw new ResourceNotFoundException("Product with id " + id + " not found");
         }
     }
     // END
