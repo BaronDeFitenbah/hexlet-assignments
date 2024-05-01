@@ -21,12 +21,17 @@ public class Application {
     private List<User> users = Data.getUsers();
 
     @Autowired
-    private List<UserProperties> admins;
+    private UserProperties userProperties;
 
     // BEGIN
     @GetMapping("/admins")
-    public List<UserProperties> show() {
-        return admins;
+    public List<String> show() {
+        List<String> admins = userProperties.getAdmins();
+
+        List<String> sortedAdmins = admins.stream()
+                .sorted()
+                .toList();
+        return sortedAdmins;
     }
     // END
 
