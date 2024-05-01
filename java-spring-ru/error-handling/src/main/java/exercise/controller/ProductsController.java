@@ -46,7 +46,7 @@ public class ProductsController {
         return product;
     }
 
-    @PostMapping(path = "/{id}")
+    @PutMapping(path = "/{id}")
     public ResponseEntity<Product> update(@PathVariable long id) {
         Optional<Product> productOptional = productRepository.findById(id);
 
