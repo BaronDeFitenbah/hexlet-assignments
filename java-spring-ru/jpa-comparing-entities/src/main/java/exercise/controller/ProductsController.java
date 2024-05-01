@@ -31,19 +31,19 @@ public class ProductsController {
         return productRepository.findAll();
     }
 
-    // BEGIN
     @PostMapping(path = "")
     public Product create(@RequestBody Product product) {
         var dopplegunger = productRepository.findAll().stream()
                 .filter(p -> p.equals(product))
                 .toList();
         if (dopplegunger.isEmpty()) {
-            throw new ResourceAlreadyExistsException("");
-        } else {
             return product;
+        } else {
+            throw new ResourceAlreadyExistsException("");
         }
     }
 
+    // BEGIN
     // END
 
     @GetMapping(path = "/{id}")
