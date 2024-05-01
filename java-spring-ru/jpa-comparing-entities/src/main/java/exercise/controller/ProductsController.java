@@ -38,6 +38,7 @@ public class ProductsController {
                 .filter(p -> p.equals(product))
                 .toList();
         if (dopplegunger.isEmpty()) {
+            productRepository.save(product);
             return new ResponseEntity<>(product, HttpStatus.CREATED);
         } else {
             throw new ResourceAlreadyExistsException("");
