@@ -1,5 +1,6 @@
 package exercise;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,11 +26,12 @@ public class Application {
 
     // BEGIN
     @GetMapping("/admins")
-    public List<String> show() {
+    public List<User> show() {
         List<String> admins = userProperties.getAdmins();
 
-        List<String> sortedAdmins = admins.stream()
-                .sorted()
+        List<User> sortedAdmins = users.stream()
+                .filter(u -> admins.contains(u.getEmail()))
+                .sorted(Comparator.comparing(User::getName))
                 .toList();
         return sortedAdmins;
     }
