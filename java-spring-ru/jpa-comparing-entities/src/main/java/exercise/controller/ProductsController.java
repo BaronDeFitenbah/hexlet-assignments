@@ -31,6 +31,7 @@ public class ProductsController {
         return productRepository.findAll();
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "")
     public Product create(@RequestBody Product product) {
         var dopplegunger = productRepository.findAll().stream()
