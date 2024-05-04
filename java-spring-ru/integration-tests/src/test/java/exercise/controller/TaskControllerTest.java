@@ -111,7 +111,7 @@ class ApplicationTest {
 
         var body = result.getResponse().getContentAsString();
         assertThatJson(body).and()
-                .node("title").isEqualTo(task.getTitle())
+                .node("title").isEqualTo(task.getTitle()).and()
                 .node("description").isEqualTo(task.getDescription());
     }
 
