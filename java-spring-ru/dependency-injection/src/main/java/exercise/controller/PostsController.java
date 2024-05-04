@@ -19,6 +19,7 @@ import exercise.repository.PostRepository;
 public  class PostsController {
     @Autowired
     private PostRepository postRepository;
+    @Autowired
     private CommentRepository commentRepository;
 
     @GetMapping(path = "")
@@ -28,7 +29,7 @@ public  class PostsController {
     @GetMapping(path = "/{id}")
     public Post show(@PathVariable long id) {
         return postRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Post not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Post with id " + id + " not found"));
     }
 
     @PostMapping(path = "")
@@ -40,7 +41,7 @@ public  class PostsController {
     @PutMapping(path = "/{id}")
     public Post update(@PathVariable long id, @RequestBody Post post) {
         var requestedPost = postRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Post with id " + id + " not found"));
         requestedPost.setTitle(post.getTitle());
         requestedPost.setBody(post.getBody());
 
