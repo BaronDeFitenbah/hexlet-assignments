@@ -110,9 +110,10 @@ class ApplicationTest {
                 .andReturn();
 
         var body = result.getResponse().getContentAsString();
-        assertThatJson(body).and()
-                .node("title").isEqualTo(task.getTitle()).and()
-                .node("description").isEqualTo(task.getDescription());
+        assertThatJson(body).and(
+                a -> a.node("title").isEqualTo(task.getTitle()),
+                a -> a.node("description").isEqualTo(task.getDescription())
+                );
     }
 
     @Test
