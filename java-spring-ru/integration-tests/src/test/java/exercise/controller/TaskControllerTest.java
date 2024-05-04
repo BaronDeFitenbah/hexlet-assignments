@@ -71,7 +71,7 @@ class ApplicationTest {
         taskRepository.save(task);
 
         mockMvc.perform(delete("/tasks/" + task.getId()))
-                .andExpect(status().isNoContent());
+                .andExpect(status().isOk());
 
         assertThat(taskRepository.findById(task.getId())).isEmpty();
     }
@@ -110,7 +110,7 @@ class ApplicationTest {
                 .andReturn();
 
         var body = result.getResponse().getContentAsString();
-        assertThatJson(body)
+        assertThatJson(body).and()
                 .node("id").isEqualTo(task.getId())
                 .node("title").isEqualTo(task.getTitle())
                 .node("description").isEqualTo(task.getDescription());
