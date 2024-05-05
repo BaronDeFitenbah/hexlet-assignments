@@ -25,7 +25,7 @@ public abstract class ProductMapper {
     @Mapping(target = "price", source = "cost")
     @Mapping(target = "title", source = "name")
     public abstract ProductDTO map(Product model);
-    @Mapping(target = "price", source = "cost")
+    @Mapping(target = "cost", source = "price")
     public abstract void update(ProductUpdateDTO dto, @MappingTarget Product model);
 }
 // END
