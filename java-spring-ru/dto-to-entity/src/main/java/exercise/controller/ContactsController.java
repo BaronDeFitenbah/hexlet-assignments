@@ -1,6 +1,7 @@
 package exercise.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ public class ContactsController {
 
     // BEGIN
     @PostMapping(path = "")
-    public ContactDTO create(@RequestBody ContactCreateDTO conctactData) {
+    public ResponseEntity<ContactDTO> create(@RequestBody ContactCreateDTO conctactData) {
         var contact = new Contact();
         contact.setPhone(conctactData.getPhone());
         contact.setFirstName(conctactData.getFirstName());
@@ -36,7 +37,7 @@ public class ContactsController {
         contactDto.setPhone(contact.getPhone());
         contactDto.setFirstName(contact.getFirstName());
         contactDto.setLastName(contact.getLastName());
-        return contactDto;
+        return new ResponseEntity<>(contactDto, HttpStatus.CREATED);
     }
     // END
 }
