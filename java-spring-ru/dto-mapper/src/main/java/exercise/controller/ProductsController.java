@@ -1,6 +1,7 @@
 package exercise.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,10 +47,10 @@ public class ProductsController {
     }
 
     @PostMapping(path = "")
-    public ProductDTO create(@RequestBody ProductCreateDTO productData) {
+    public ResponseEntity<ProductDTO> create(@RequestBody ProductCreateDTO productData) {
         var product = productMapper.map(productData);
         productRepository.save(product);
-        return productMapper.map(product);
+        return new ResponseEntity<>(productMapper.map(product), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{id}")
