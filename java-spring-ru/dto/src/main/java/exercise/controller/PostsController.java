@@ -18,7 +18,37 @@ import exercise.dto.CommentDTO;
 @RestController
 @RequestMapping("/posts")
 public class PostsController {
-    @GetMapping
-    public
+
+    @Autowired
+    PostRepository postRepository;
+
+    @Autowired
+    CommentRepository commentRepository;
+
+    @GetMapping(path = "")
+    public List<PostDTO> show() {
+        var posts = postRepository.findAll();
+        var result = posts.stream()
+                .map(this::toDTO)
+                .toList();
+        return result;
+    }
+
+    @GetMapping(path = "/{id}")
+    public PostDTO show(@PathVariable long id) {
+        var post = postRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
+        return toDTO(post);
+    }
+
+    private PostDTO toDTO (Post post) {
+        var dto = new PostDTO();
+        dto.setBody(post.getBody());
+        dto.setId(post.getId());
+        dto.setComments(commentRepository.findByPostId(post.getId()));
+        return dto;
+    }
+
+
 }
 // END
