@@ -47,10 +47,11 @@ public class ProductsController {
     }
 
     @PostMapping(path = "")
-    public ResponseEntity<ProductDTO> create(@RequestBody ProductCreateDTO productData) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public ProductDTO create(@RequestBody ProductCreateDTO productData) {
         var product = productMapper.map(productData);
         productRepository.save(product);
-        return new ResponseEntity<>(productMapper.map(product), HttpStatus.CREATED);
+        return productMapper.map(product);
     }
 
     @PutMapping(path = "/{id}")
