@@ -1,5 +1,6 @@
 package exercise.controller;
 
+import exercise.model.Comment;
 import exercise.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +46,14 @@ public class PostsController {
         var dto = new PostDTO();
         dto.setBody(post.getBody());
         dto.setId(post.getId());
-        dto.setComments(commentRepository.findByPostId(post.getId()));
+        dto.setComments(commentRepository.findByPostId(post.getId()).stream().map(this::toDTO).toList());
+        return dto;
+    }
+
+    private CommentDTO toDTO(Comment comment) {
+        var dto = new CommentDTO();
+        dto.setBody(comment.getBody());
+        dto.setId(comment.getId());
         return dto;
     }
 
