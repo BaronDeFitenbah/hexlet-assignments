@@ -51,8 +51,7 @@ public class ProductsController {
     public ProductDTO create(@RequestBody ProductCreateDTO productData) {
         var product = productMapper.map(productData);
         productRepository.save(product);
-        var productDTO = productMapper.map(product);
-        return productDTO;
+        return productMapper.map(product);
     }
 
     @PutMapping(path = "/{id}")
