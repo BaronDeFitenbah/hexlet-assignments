@@ -38,7 +38,7 @@ public class PostsController {
     @GetMapping(path = "/{id}")
     public PostDTO show(@PathVariable long id) {
         var post = postRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Post with id " + id + " not found"));
         return toDTO(post);
     }
 
@@ -46,6 +46,7 @@ public class PostsController {
         var dto = new PostDTO();
         dto.setBody(post.getBody());
         dto.setId(post.getId());
+        dto.setTitle(post.getTitle());
         dto.setComments(commentRepository.findByPostId(post.getId()).stream().map(this::toDTO).toList());
         return dto;
     }
