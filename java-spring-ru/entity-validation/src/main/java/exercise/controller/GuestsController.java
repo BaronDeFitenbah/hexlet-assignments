@@ -46,6 +46,7 @@ public class GuestsController {
     }
 
     // BEGIN
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "")
     public GuestDTO create(@Valid @RequestBody GuestCreateDTO guestData) {
         var guest = guestMapper.map(guestData);
