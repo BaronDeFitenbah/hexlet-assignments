@@ -52,7 +52,7 @@ public class User {
         task.setAssignee(this);
     }
 
-    public void removePost(Task task) {
+    public void removeTask(Task task) {
         tasks.remove(task);
         task.setAssignee(null);
     }
