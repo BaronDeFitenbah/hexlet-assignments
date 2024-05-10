@@ -45,14 +45,14 @@ public class User {
     private LocalDate createdAt;
 
     // BEGIN
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "assignee")
     private List<Task> assignedTasks = new ArrayList<>();
     public void addTask(Task task) {
         assignedTasks.add(task);
         task.setAssignee(this);
     }
 
-    public void removePost(Task task) {
+    public void removeTask(Task task) {
         assignedTasks.remove(task);
         task.setAssignee(null);
     }
