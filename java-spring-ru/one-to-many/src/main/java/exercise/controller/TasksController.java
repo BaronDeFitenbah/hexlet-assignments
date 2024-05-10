@@ -7,6 +7,7 @@ import exercise.dto.TaskDTO;
 import exercise.dto.TaskUpdateDTO;
 import exercise.mapper.TaskMapper;
 import exercise.mapper.UserMapper;
+import exercise.model.User;
 import exercise.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,7 +68,13 @@ public class TasksController {
         var task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("TASK NOT FOUND"));
 
-        taskMapper.update(taskData, task);
+        User assignee = userRepository.findById(taskData.getAssigneeId())
+                .orElseThrow(() -> new ResourceNotFoundException("USER NOT FOUND"));
+
+        task.setAssignee(assignee);
+        task.setTitle(taskData.getTitle());
+        task.setDescription(taskData.getDescription());
+
         taskRepository.save(task);
 
         return taskMapper.map(task);

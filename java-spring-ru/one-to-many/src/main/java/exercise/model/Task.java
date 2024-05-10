@@ -45,8 +45,6 @@ public class Task {
     @NotNull
     private User assignee;
 
-    @NotBlank
-    private long assigneeId;
 
     // END
 }
