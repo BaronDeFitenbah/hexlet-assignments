@@ -46,14 +46,14 @@ public class User {
 
     // BEGIN
     @OneToMany(mappedBy = "assignee")
-    private List<Task> assignedTasks = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
     public void addTask(Task task) {
-        assignedTasks.add(task);
+        tasks.add(task);
         task.setAssignee(this);
     }
 
-    public void removeTask(Task task) {
-        assignedTasks.remove(task);
+    public void removePost(Task task) {
+        tasks.remove(task);
         task.setAssignee(null);
     }
     // END
