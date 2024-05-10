@@ -43,6 +43,6 @@ public class Task {
     // BEGIN
     @ManyToOne
     @NotNull
-    private User author;
+    private User assignee;
     // END
 }

@@ -46,15 +46,15 @@ public class User {
 
     // BEGIN
     @OneToMany(mappedBy = "author")
-    private List<Task> tasks = new ArrayList<>();
+    private List<Task> assignedTasks = new ArrayList<>();
     public void addTask(Task task) {
-        tasks.add(task);
-        task.setAuthor(this);
+        assignedTasks.add(task);
+        task.setAssignee(this);
     }
 
     public void removePost(Task task) {
-        tasks.remove(task);
-        task.setAuthor(null);
+        assignedTasks.remove(task);
+        task.setAssignee(null);
     }
     // END
 
