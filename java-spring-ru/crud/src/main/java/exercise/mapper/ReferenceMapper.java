@@ -1,5 +1,6 @@
 package exercise.mapper;
 
+import exercise.model.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.TargetType;
@@ -18,6 +19,10 @@ public abstract class ReferenceMapper {
 
     public <T extends BaseEntity> T toEntity(Long id, @TargetType Class<T> entityClass) {
         return id != null ? entityManager.find(entityClass, id) : null;
+    }
+
+    public Category toCategory(Long categoryId) {
+        return toEntity(categoryId, Category.class);
     }
 }
 // END

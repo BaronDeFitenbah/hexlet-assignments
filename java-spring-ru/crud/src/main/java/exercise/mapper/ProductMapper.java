@@ -13,19 +13,19 @@ import org.mapstruct.ReportingPolicy;
 
 // BEGIN
 @Mapper(
-        // Подключение JsonNullableMapper
-        uses = { JsonNullableMapper.class },
+        uses = { JsonNullableMapper.class, ReferenceMapper.class },
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
         componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public abstract class ProductMapper {
-    @Mapping(target = "category", source = "categoryId")
-
+    @Mapping(target = "category", source = "categoryId", qualifiedByName = "toCategory")
     public abstract void update(ProductUpdateDTO dto, @MappingTarget Product model);
+
     @Mapping(source = "category.id", target = "categoryId")
     public abstract ProductDTO map(Product model);
-    @Mapping(target = "category", source = "categoryId")
+
+    @Mapping(target = "category", source = "categoryId", qualifiedByName = "toCategory")
     public abstract Product map(ProductCreateDTO dto);
 }
 // END
