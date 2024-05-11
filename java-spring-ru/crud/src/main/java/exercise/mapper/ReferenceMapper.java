@@ -3,6 +3,7 @@ package exercise.mapper;
 import exercise.model.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.Named;
 import org.mapstruct.TargetType;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,6 +22,8 @@ public abstract class ReferenceMapper {
         return id != null ? entityManager.find(entityClass, id) : null;
     }
 
+
+    @Named("toCategory")
     public Category toCategory(Long categoryId) {
         return toEntity(categoryId, Category.class);
     }
