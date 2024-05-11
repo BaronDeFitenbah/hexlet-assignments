@@ -49,7 +49,9 @@ public class ProductsController {
     public ProductDTO show(@PathVariable long id) {
         var product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("NOT FOUND"));
-        return productMapper.map(product);
+        var productDto = productMapper.map(product);
+        productDto.setCategoryName(product.getCategory().getName());
+        return productDto;
     }
 
     @PostMapping(path = "")
@@ -72,6 +74,7 @@ public class ProductsController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable long id) {
         var product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("NOT FOUND"));
