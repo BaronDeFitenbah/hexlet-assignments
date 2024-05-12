@@ -39,6 +39,7 @@ public class AuthorsController {
     }
 
     @PostMapping(path = "")
+    @ResponseStatus(HttpStatus.CREATED)
     public AuthorDTO create(@RequestBody AuthorCreateDTO authorData) {
         return authorService.create(authorData);
     }
