@@ -1,7 +1,9 @@
 package exercise.mapper;
 
+import exercise.model.Author;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.Named;
 import org.mapstruct.TargetType;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,5 +19,10 @@ public abstract class ReferenceMapper {
 
     public <T extends BaseEntity> T toEntity(Long id, @TargetType Class<T> entityClass) {
         return id != null ? entityManager.find(entityClass, id) : null;
+    }
+
+    @Named("authorToId")
+    public Long authorToId(Author author) {
+        return author != null ? author.getId() : null;
     }
 }
