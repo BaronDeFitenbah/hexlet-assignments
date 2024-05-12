@@ -3,7 +3,12 @@ package exercise.mapper;
 import exercise.dto.*;
 import exercise.model.Author;
 import exercise.model.Book;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.ReportingPolicy;
 
 @Mapper(
         uses = {JsonNullableMapper.class, ReferenceMapper.class},
@@ -17,11 +22,10 @@ public abstract class BookMapper {
     @Mapping(target = "author", source = "authorId")
     public abstract Book map(BookCreateDTO dto);
 
-    @Mapping(source = "author", target = "authorId", qualifiedByName = "authorToId")
+    @Mapping(source = "authorId", target = "author")
     public abstract BookDTO map(Book model);
     // END
 
     @Mapping(target = "author", source = "authorId")
     public abstract void update(BookUpdateDTO dto, @MappingTarget Book model);
-
 }
