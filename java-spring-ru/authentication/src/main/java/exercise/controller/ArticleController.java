@@ -42,6 +42,7 @@ public class ArticleController {
 
     // BEGIN
     @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
     ArticleDTO create(@RequestBody ArticleCreateDTO articleData) {
         var user = userUtils.getCurrentUser();
         var article = articleMapper.map(articleData);
