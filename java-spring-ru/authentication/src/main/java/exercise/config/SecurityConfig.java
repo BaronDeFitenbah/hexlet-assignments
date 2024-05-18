@@ -41,8 +41,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         // Разрешаем доступ только к /api/login, чтобы аутентифицироваться и получить токен
-                        .requestMatchers("/api/login").permitAll()
-                        .requestMatchers("/api/users").permitAll()
+                        .requestMatchers("/api/login", "/users").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer((rs) -> rs.jwt((jwt) -> jwt.decoder(jwtDecoder)))
