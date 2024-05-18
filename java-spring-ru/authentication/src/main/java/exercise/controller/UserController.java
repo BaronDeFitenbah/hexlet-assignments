@@ -28,7 +28,6 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @GetMapping(path = "")
     public List<UserDTO> index() {
 
