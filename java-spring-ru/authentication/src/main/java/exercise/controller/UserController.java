@@ -28,8 +28,10 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @GetMapping(path = "")
     public List<UserDTO> index() {
+
         var users = userRepository.findAll();
         return users.stream()
                 .map(p -> userMapper.map(p))
