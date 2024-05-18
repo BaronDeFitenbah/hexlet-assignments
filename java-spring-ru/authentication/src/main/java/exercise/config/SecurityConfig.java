@@ -42,8 +42,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Разрешаем доступ только к /api/login, чтобы аутентифицироваться и получить токен
                         .requestMatchers("/api/login", "users").permitAll()
-                        .requestMatchers("/users").hasAuthority("ROLE_ADMIN")
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated()
+                        .anyRequest().hasAuthority("ROLE_ADMIN"))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer((rs) -> rs.jwt((jwt) -> jwt.decoder(jwtDecoder)))
                 .httpBasic(Customizer.withDefaults())
